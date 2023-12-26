@@ -8,6 +8,12 @@ import { createPinia } from "pinia";
 //Emitter config
 import mitt from "mitt";
 const Emitter = mitt();
+
+//Swiper Config
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
 // Vuetify
 import "@mdi/font/css/materialdesignicons.css";
 import "vuetify/styles";

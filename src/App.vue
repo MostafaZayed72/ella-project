@@ -28,4 +28,7 @@ nav {
     }
   }
 }
+.v-rating__wrapper {
+  margin-right: 20px;
+}
 </style>
