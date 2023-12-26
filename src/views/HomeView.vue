@@ -4,6 +4,7 @@ import UpperBanner from "@/components/home_page/UpperBanner.vue";
 import TopOffers from "@/components/home_page/TopOffers.vue";
 import TopCategories from "@/components/home_page/TopCategories.vue";
 import NewProducts from "@/components/home_page/NewProducts.vue";
+import QualityFeatures from "@/components/home_page/QualityFeatures.vue";
 import { productsModule } from "@/stores/products";
 import { onMounted } from "vue";
 import FlashDeals from "@/components/home_page/ProductsSwiper.vue";
@@ -21,5 +22,6 @@ onMounted(() => {
     <FlashDeals :products="store.flashDeals" />
     <TopCategories />
     <NewProducts :products="store.newProducts" />
+    <QualityFeatures />
   </div>
 </template>
