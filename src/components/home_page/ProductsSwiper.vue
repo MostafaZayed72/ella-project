@@ -6,6 +6,12 @@ const props = defineProps({
   products: {
     type: Array,
   },
+  title: {
+    type: String,
+  },
+  titleColor: {
+    type: String,
+  },
 });
 const shownItem = ref({});
 const modules = ref([Pagination, Navigation, Autoplay]);
@@ -13,12 +19,12 @@ const modules = ref([Pagination, Navigation, Autoplay]);
 
 <template>
   <div class="products-swiper pt-16">
-    <div class="title d-flex align-center justify-space-between">
+    <div class="title d-flex align-center justify-space-between mb-10 px-5">
       <h2
         style="font-weight: 900; font-size: 30px"
-        class="text-red-darken-3 mb-10 px-5"
+        :class="`text-${props.titleColor}`"
       >
-        Flash Deals
+        {{ props.title }}
       </h2>
       <a href="#" class="mr-5 text-black" style="font-size: 14px">Shop All</a>
     </div>
@@ -32,7 +38,7 @@ const modules = ref([Pagination, Navigation, Autoplay]);
       :navigation="{ prevIcon: '.swiper-prev', nextIcon: '.swiper-next' }"
     >
       <swiper-slide v-for="item in props.products" :key="item.id">
-        <v-card elevation="0" class="pb-5">
+        <v-card elevation="0" class="pb-5" height="350">
           <v-hover v-slot="{ isHovering, props }">
             <div class="img-parent" style="height: 200px; overflow: hidden">
               <img
@@ -94,16 +100,16 @@ const modules = ref([Pagination, Navigation, Autoplay]);
                 "
             /></v-btn>
           </v-btn-toggle>
-          <div class="mt-5">
-            <v-btn
-              density="combact"
-              class="py-2 px-12"
-              style="text-transform: none; border-radius: 30px"
-              variant="outlined"
-              >Choose Options</v-btn
-            >
-          </div>
         </v-card>
+        <div class="mt-8">
+          <v-btn
+            density="combact"
+            class="py-2 px-12"
+            style="text-transform: none; border-radius: 30px"
+            variant="outlined"
+            >Choose Options</v-btn
+          >
+        </div>
       </swiper-slide>
       <div class="swiper-prev"></div>
       <div class="swiper-next"></div>
