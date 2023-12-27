@@ -24,7 +24,9 @@ const modules = ref([Pagination]);
         <v-col cols="7" class="pt-16" v-if="!products.length">
           <v-row>
             <v-col cols="4" v-for="num in 3" :key="num">
-              <v-skeleton-loader type="image, article, button"></v-skeleton-loader>
+              <v-skeleton-loader
+                type="image, article, button"
+              ></v-skeleton-loader>
             </v-col>
           </v-row>
         </v-col>
