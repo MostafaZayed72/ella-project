@@ -63,6 +63,6 @@ onMounted(() => {
       titleColor="#404040"
     />
     <WhyShopWithUs />
-    <p>test</p>
+    <p>tests</p>
   </div>
 </template>
