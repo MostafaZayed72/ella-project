@@ -1,6 +1,7 @@
 <script setup>
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import { Pagination, Navigation, Autoplay } from "swiper";
+import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
 import { defineProps, ref } from "vue";
 const props = defineProps({
   products: {
@@ -28,6 +29,18 @@ const modules = ref([Pagination, Navigation, Autoplay]);
       </h2>
       <a href="#" class="mr-5 text-black" style="font-size: 14px">Shop All</a>
     </div>
+    <v-container v-if="!products.length" fluid>
+      <v-row
+        ><v-col cols="12" class="pt-16">
+          <v-row>
+            <v-col cols="3" v-for="num in 4" :key="num">
+              <v-skeleton-loader
+                type="image, article, button"
+              ></v-skeleton-loader>
+            </v-col>
+          </v-row> </v-col
+      ></v-row>
+    </v-container>
     <Swiper
       :pagination="{ el: '.swiper-pagination', clickable: true }"
       :modules="modules"

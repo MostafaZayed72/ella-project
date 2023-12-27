@@ -30,7 +30,7 @@ const modules = ref([Pagination]);
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="7" class="pt-16" v-else>
+        <v-col cols="7" class="pt-16">
           <Swiper
             :pagination="{ el: '.swiper-pagination', clickable: true }"
             :modules="modules"
