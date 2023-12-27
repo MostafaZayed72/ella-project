@@ -5,7 +5,7 @@ import TopOffers from "@/components/home_page/TopOffers.vue";
 import TopCategories from "@/components/home_page/TopCategories.vue";
 import NewProducts from "@/components/home_page/NewProducts.vue";
 import QualityFeatures from "@/components/home_page/QualityFeatures.vue";
-import WhyShopWithUs from "@/components/home_page/WhyShopWithUs.vue";
+import ShopWithus from "@/components/home_page/ShopWithus.vue";
 import { productsModule } from "@/stores/products";
 import { onMounted } from "vue";
 import ProductsComponent from "@/components/home_page/ProductsSwiper.vue";
@@ -62,7 +62,7 @@ onMounted(() => {
       title="Top Groceries"
       titleColor="#404040"
     />
-    <WhyShopWithUs />
+    <ShopWithus />
     <p>tests</p>
   </div>
 </template>
