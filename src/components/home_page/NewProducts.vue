@@ -21,14 +21,14 @@ const modules = ref([Pagination]);
     </div>
     <v-container fluid
       ><v-row>
-        <v-col cols="12" v-if="!products.length">
+        <v-col cols="7" class="pt-16" v-if="!products.length">
           <v-row>
-            <v-col cols="3" v-for="num in 4" :key="num">
-              <v-skeleton-loader type="image, article"></v-skeleton-loader>
+            <v-col cols="4" v-for="num in 3" :key="num">
+              <v-skeleton-loader type="image, article, button"></v-skeleton-loader>
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="7" class="pt-16">
+        <v-col cols="7" class="pt-16" v-else>
           <Swiper
             :pagination="{ el: '.swiper-pagination', clickable: true }"
             :modules="modules"
