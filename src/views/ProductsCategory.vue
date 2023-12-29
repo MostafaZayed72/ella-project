@@ -9,8 +9,8 @@ const shownItem = ref({});
 watchEffect(() => {
   store.getProductsByCategory(route.params.category);
 });
-onMounted(async () => {
-  await store.getProductsByCategory(route.params.category);
+onMounted(() => {
+  store.getProductsByCategory(route.params.category);
 });
 </script>
 
