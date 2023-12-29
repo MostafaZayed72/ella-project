@@ -8,6 +8,37 @@ export const productsModule = defineStore("productsModule", () => {
   const mobilePhones = ref([]);
   const fragrances = ref([]);
   const groceries = ref([]);
+  const categoryProducts = ref([]);
+  const categories = ref([
+    {
+      title: "Smart Phones",
+      rout: "smartphones",
+    },
+    {
+      title: "Laptops",
+      rout: "laptops",
+    },
+    {
+      title: "Furniture",
+      rout: "furniture",
+    },
+    {
+      title: "Men's Shoes",
+      rout: "mens-shoes",
+    },
+    {
+      title: "Men's Watches",
+      rout: "mens-watches",
+    },
+    {
+      title: "Women's Bags",
+      rout: "womens-bags",
+    },
+    {
+      title: "Motor Cycles",
+      rout: "motorcycles",
+    },
+  ]);
   const getProducts = async () => {
     const res = await axios.get("https://dummyjson.com/products");
     flashDeals.value = res.data.products.slice(0, 8);
@@ -24,6 +55,14 @@ export const productsModule = defineStore("productsModule", () => {
       (el) => el.category === "groceries"
     );
   };
+
+  const getProductsByCategory = async (category) => {
+    const res = await axios.get(
+      `https://dummyjson.com/products/category/${category}`
+    );
+    categoryProducts.value = res.data;
+  };
+
   return {
     flashDeals,
     getProducts,
@@ -31,5 +70,8 @@ export const productsModule = defineStore("productsModule", () => {
     mobilePhones,
     fragrances,
     groceries,
+    categories,
+    categoryProducts,
+    getProductsByCategory,
   };
 });

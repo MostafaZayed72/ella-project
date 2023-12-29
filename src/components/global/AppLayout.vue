@@ -5,7 +5,7 @@
       <AppNav />
       <FixedNav />
       <v-main style="padding-top: 160px">
-        <HomeView />
+        <RouterView />
       </v-main>
       <app-footer />
     </v-layout>
@@ -16,6 +16,5 @@
 import AppNav from "./AppNav.vue";
 import AppFooter from "./AppFooter.vue";
 import CardDrawer from "./CardDrawer.vue";
-import HomeView from "@/views/HomeView.vue";
 import FixedNav from "./FixedNav.vue";
 </script>

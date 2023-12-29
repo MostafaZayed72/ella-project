@@ -1,9 +1,12 @@
 <script setup>
-import { inject } from "vue";
+import { inject, ref } from "vue";
+import { productsModule } from "@/stores/products";
 const Emitter = inject("Emitter");
 const openCart = () => {
   Emitter.emit("openCart");
 };
+const store = productsModule();
+const categories = ref(store.categories);
 </script>
 
 <template>
@@ -11,24 +14,31 @@ const openCart = () => {
     <v-app-bar color="#02218f">
       <v-container fluid>
         <v-row>
-          <v-col cols="2">
+          <v-col cols="3">
             <img class="w-50" src="@/assets/images/logo.png" alt="" />
           </v-col>
-          <v-col cols="5">
+          <v-col cols="7">
             <ul
               class="links d-flex justify-space-between"
               style="list-style: none"
             >
-              <li>Theme Demo</li>
-              <li>Shop</li>
-              <li>Product</li>
-              <li>New In</li>
-              <li>Must Have</li>
-              <li>Collections</li>
+              <li v-for="category in categories" :key="category.title">
+                <router-link
+                  :to="{
+                    name: 'products_category',
+                    params: {
+                      category: category.rout,
+                      title: category.title,
+                    },
+                  }"
+                  style="color: white; text-decoration: none"
+                  >{{ category.title }}</router-link
+                >
+              </li>
             </ul>
           </v-col>
           <v-col
-            cols="5"
+            cols="2"
             class="d-flex justify-end align-center"
             style="gap: 20px"
           >

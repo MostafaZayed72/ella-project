@@ -10,8 +10,8 @@ import { productsModule } from "@/stores/products";
 import { onMounted } from "vue";
 import ProductsComponent from "@/components/home_page/ProductsSwiper.vue";
 const store = productsModule();
-onMounted(() => {
-  store.getProducts();
+onMounted(async () => {
+  await store.getProducts();
 });
 </script>
 

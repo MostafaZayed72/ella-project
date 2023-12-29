@@ -1,5 +1,6 @@
 <script setup>
 import { ref, inject } from "vue";
+import { productsModule } from "@/stores/products";
 const Emitter = inject("Emitter");
 const openCart = () => {
   Emitter.emit("openCart");
@@ -78,7 +79,7 @@ const selectedLang = ref([
                             d="M322.783,189.219L322.783,189.219L437.02,74.981c-5.252-5.254-10.743-10.266-16.435-15.047   l-97.802,97.803V189.219z"
                           ></path>
                         </g>
-                      </svg>`,
+</svg>`,
     lang: "EN",
     currency: "USD",
   },
@@ -188,12 +189,14 @@ const langs = ref([
     currency: "EURO",
   },
 ]);
+const store = productsModule();
+const categories = ref(store.categories);
 </script>
 
 <template>
   <div class="nav-bar">
     <v-app-bar color="#02218f" height="fit-content" class="pt-3" absolute>
-      <!-- <v-app-bar-nav-icon @click="openCart"></v-app-bar-nav-icon> -->
+      <v-app-bar-nav-icon @click="openCart"></v-app-bar-nav-icon>
       <v-container fluid>
         <v-row>
           <v-col cols="3">
@@ -318,21 +321,27 @@ const langs = ref([
           </v-col>
         </v-row>
         <v-row class="mt-6">
-          <v-col cols="5">
+          <v-col cols="8">
             <ul
               class="links d-flex justify-space-between"
               style="list-style: none"
             >
-              <li>Theme Demo</li>
-              <li>Shop</li>
-              <li>Product</li>
-              <li>New In</li>
-              <li>Must Have</li>
-              <li>Collections</li>
+              <li v-for="category in categories" :key="category.title">
+                <router-link
+                  :to="{
+                    name: 'products_category',
+                    params: {
+                      category: category.rout,
+                      title: category.title,
+                    },
+                  }"
+                  style="color: white; text-decoration: none"
+                  >{{ category.title }}</router-link
+                >
+              </li>
             </ul>
           </v-col>
-          <v-col cols="2"></v-col>
-          <v-col cols="5" class="d-flex justify-end" style="gap: 35px">
+          <v-col cols="4" class="d-flex justify-end" style="gap: 35px">
             <div class="help d-flex align-center" style="gap: 5px">
               <svg
                 aria-hidden="true"

@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from "vue";
+import { productsModule } from "@/stores/products";
+const store = productsModule();
+const categories = ref(store.categories);
 const svgs = ref([
   `<svg
     class="icon icon--full-color"
@@ -268,26 +271,21 @@ const svgs = ref([
               <v-card-title style="font-size: 14px; font-weight: 900"
                 >SHOP</v-card-title
               >
-              <v-card-text class="pt-0 pb-3" style="color: rgb(71, 71, 71)"
-                >Electronics</v-card-text
-              >
-              <v-card-text class="pt-0 pb-3" style="color: rgb(71, 71, 71)"
-                >Computers & Labs</v-card-text
-              >
-              <v-card-text class="pt-0 pb-3" style="color: rgb(71, 71, 71)"
-                >Smartphones & Tablets</v-card-text
-              >
-              <v-card-text class="pt-0 pb-3" style="color: rgb(71, 71, 71)"
-                >Cameras</v-card-text
-              >
-              <v-card-text class="pt-0 pb-3" style="color: rgb(71, 71, 71)"
-                >Video Games & Systems</v-card-text
-              >
-              <v-card-text class="pt-0 pb-3" style="color: rgb(71, 71, 71)"
-                >Home Furniture</v-card-text
-              >
-              <v-card-text class="pt-0 pb-3" style="color: rgb(71, 71, 71)"
-                >Weekly Special</v-card-text
+              <v-card-text
+                class="pt-0 pb-3"
+                v-for="category in categories"
+                :key="category.title"
+                ><router-link
+                  :to="{
+                    name: 'products_category',
+                    params: {
+                      category: category.rout,
+                      title: category.title,
+                    },
+                  }"
+                  style="text-decoration: none; color: rgb(71, 71, 71)"
+                  >{{ category.title }}</router-link
+                ></v-card-text
               >
             </v-card>
           </v-col>
@@ -355,7 +353,7 @@ const svgs = ref([
                 style="color: rgb(71, 71, 71); gap: 16px"
               >
                 <span class="pt-1">
-                  `<svg
+                  <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 384 512"
                     width="14"
@@ -373,7 +371,7 @@ const svgs = ref([
                 class="pt-0 pb-3 px-0 d-flex"
                 style="color: rgb(71, 71, 71); gap: 16px"
                 ><span class="py-1"
-                  >`<svg
+                  ><svg
                     aria-hidden="true"
                     focusable="false"
                     data-prefix="fas"
@@ -396,7 +394,7 @@ const svgs = ref([
                 class="pt-0 pb-3 px-0 d-flex"
                 style="color: rgb(71, 71, 71); gap: 16px"
                 ><span class="py-1"
-                  >`<svg
+                  ><svg
                     aria-hidden="true"
                     focusable="false"
                     data-prefix="fas"
@@ -425,7 +423,7 @@ const svgs = ref([
                   background-color: #454545;
                   border-radius: 50%;
                 "
-                >`<svg
+                ><svg
                   aria-hidden="true"
                   focusable="false"
                   role="presentation"
@@ -447,7 +445,7 @@ const svgs = ref([
                   background-color: #454545;
                   border-radius: 50%;
                 "
-                >`<svg
+                ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   xmlns:xlink="http://www.w3.org/1999/xlink"
                   viewBox="0 0 512 512"
@@ -473,7 +471,7 @@ const svgs = ref([
                   background-color: #454545;
                   border-radius: 50%;
                 "
-                >`<svg
+                ><svg
                   aria-hidden="true"
                   focusable="false"
                   role="presentation"
@@ -494,7 +492,7 @@ const svgs = ref([
                   background-color: #454545;
                   border-radius: 50%;
                 "
-                >`<svg
+                ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   class="icon icon-snapchat"
                   viewBox="0 0 50 50"
@@ -513,7 +511,7 @@ const svgs = ref([
                   background-color: #454545;
                   border-radius: 50%;
                 "
-                >`<svg
+                ><svg
                   aria-hidden="true"
                   focusable="false"
                   role="presentation"

@@ -10,8 +10,6 @@
               <v-btn
                 variant="outlined"
                 style="border-radius: 30px; text-transform: none"
-                class="py-4 px-10"
-                density="combact"
                 >Shop Now</v-btn
               >
             </div>

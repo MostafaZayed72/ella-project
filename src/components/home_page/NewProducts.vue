@@ -74,7 +74,6 @@ const modules = ref([Pagination]);
                   readonly
                   color="yellow-darken-3"
                   size="x-small"
-                  density="combact"
                 ></v-rating>
                 <v-card-text class="pl-0 pt-0">
                   <del>${{ item.price }}</del> From
@@ -111,7 +110,6 @@ const modules = ref([Pagination]);
                 </v-btn-toggle>
                 <div class="mt-5">
                   <v-btn
-                    density="combact"
                     class="py-2 px-12"
                     style="text-transform: none; border-radius: 30px"
                     variant="outlined"
