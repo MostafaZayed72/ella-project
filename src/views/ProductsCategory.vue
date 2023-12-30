@@ -6,11 +6,16 @@ const store = productsModule();
 const route = useRoute();
 const categoryProducts = ref(store.categoryProducts);
 const shownItem = ref({});
-watchEffect(() => {
-  store.getProductsByCategory(route.params.category);
+const loading = ref(false);
+watchEffect(async () => {
+  loading.value = true;
+  await store.getProductsByCategory(route.params.category);
+  loading.value = false;
 });
-onMounted(() => {
-  store.getProductsByCategory(route.params.category);
+onMounted(async () => {
+  loading.value = true;
+  await store.getProductsByCategory(route.params.category);
+  loading.value = false;
 });
 </script>
 
@@ -20,7 +25,12 @@ onMounted(() => {
     <v-container fluid>
       <v-row>
         <v-col v-for="item in categoryProducts.products" :key="item.id"
-          ><v-card elevation="0" class="pb-5">
+          ><v-card
+            elevation="0"
+            class="pb-5 pt-5"
+            :loading="loading"
+            min-height="700px"
+          >
             <v-hover v-slot="{ isHovering, props }">
               <div class="img-parent" style="height: 160px; overflow: hidden">
                 <img

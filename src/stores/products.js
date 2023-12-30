@@ -61,6 +61,7 @@ export const productsModule = defineStore("productsModule", () => {
       `https://dummyjson.com/products/category/${category}`
     );
     categoryProducts.value = res.data;
+    console.log(res.data);
   };
 
   return {
