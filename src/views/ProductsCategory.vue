@@ -1,22 +1,30 @@
 <script setup>
 import { productsModule } from "@/stores/products";
-import { ref, onMounted, watchEffect } from "vue";
+import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import { storeToRefs } from "pinia";
+
 const store = productsModule();
 const route = useRoute();
-const categoryProducts = ref(store.categoryProducts);
+const { categoryProducts } = storeToRefs(store);
 const shownItem = ref({});
 const loading = ref(false);
-watchEffect(async () => {
-  loading.value = true;
-  await store.getProductsByCategory(route.params.category);
-  loading.value = false;
-});
-onMounted(async () => {
-  loading.value = true;
-  await store.getProductsByCategory(route.params.category);
-  loading.value = false;
-});
+
+const getProducts = async () => {
+  try {
+    loading.value = true;
+    await store.getProductsByCategory(route.params.category);
+    loading.value = false;
+  } catch (error) {
+    console.log(error);
+  }
+};
+getProducts();
+
+watch(
+  () => route.params.category,
+  () => getProducts()
+);
 </script>
 
 <template>

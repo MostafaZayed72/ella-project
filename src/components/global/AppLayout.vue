@@ -5,7 +5,9 @@
       <AppNav />
       <FixedNav />
       <v-main style="padding-top: 160px">
-        <RouterView />
+        <RouterView v-slot="{ Component, route }">
+          <component :is="Component" :key="route.name" />
+        </RouterView>
       </v-main>
       <app-footer />
     </v-layout>
