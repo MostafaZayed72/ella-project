@@ -30,15 +30,14 @@ watch(
 <template>
   <div class="products-category mt-10">
     <h1 class="text-center">{{ route.params.title }}</h1>
-    <v-container fluid>
+    <v-container>
       <v-row>
-        <v-col v-for="item in categoryProducts.products" :key="item.id"
-          ><v-card
-            elevation="0"
-            class="pb-5 pt-5"
-            :loading="loading"
-            min-height="700px"
-          >
+        <v-col
+          cols="3"
+          class="px-5"
+          v-for="item in categoryProducts.products"
+          :key="item.id"
+          ><v-card elevation="0" class="pb-5 pt-5" :loading="loading">
             <v-hover v-slot="{ isHovering, props }">
               <div class="img-parent" style="height: 160px; overflow: hidden">
                 <img
@@ -56,7 +55,7 @@ watch(
                 />
               </div>
             </v-hover>
-            <v-card-text class="pl-0 pb-1"
+            <v-card-text class="pl-0 pb-1" style="height: 75px"
               >({{ item.title }})
               {{
                 item.description.split(" ").length <= 2
