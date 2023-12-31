@@ -347,7 +347,13 @@ const svgs = ref([
           </v-col>
           <v-col cols="3" class="pt-7">
             <v-card elevation="0" color="transparent">
-              <img src="@/assets/images/footer-logo.webp" class="pb-5" alt="" />
+              <img
+                src="@/assets/images/footer-logo.webp"
+                @click="$router.push({ name: 'home' })"
+                style="cursor: pointer"
+                class="pb-5"
+                alt=""
+              />
               <v-card-text
                 class="pt-0 pb-3 px-0 d-flex"
                 style="color: rgb(71, 71, 71); gap: 16px"

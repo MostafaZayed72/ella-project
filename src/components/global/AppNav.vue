@@ -200,7 +200,12 @@ const categories = ref(store.categories);
       <v-container fluid>
         <v-row>
           <v-col cols="3">
-            <img src="@/assets/images/logo.png" alt="" />
+            <img
+              src="@/assets/images/logo.png"
+              alt=""
+              @click="$router.push({ name: 'home' })"
+              style="cursor: pointer"
+            />
           </v-col>
           <v-col cols="5">
             <div class="position-relative" style="width: 90%">

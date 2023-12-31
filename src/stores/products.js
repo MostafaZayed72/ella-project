@@ -34,10 +34,6 @@ export const productsModule = defineStore("productsModule", () => {
       title: "Women's Bags",
       rout: "womens-bags",
     },
-    {
-      title: "Motor Cycles",
-      rout: "motorcycles",
-    },
   ]);
   const getProducts = async () => {
     const res = await axios.get("https://dummyjson.com/products");

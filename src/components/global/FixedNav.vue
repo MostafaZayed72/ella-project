@@ -15,7 +15,13 @@ const categories = ref(store.categories);
       <v-container fluid>
         <v-row>
           <v-col cols="3">
-            <img class="w-50" src="@/assets/images/logo.png" alt="" />
+            <img
+              class="w-50"
+              src="@/assets/images/logo.png"
+              alt=""
+              @click="$router.push({ name: 'home' })"
+              style="cursor: pointer"
+            />
           </v-col>
           <v-col cols="7">
             <ul
