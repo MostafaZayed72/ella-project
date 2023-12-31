@@ -13,7 +13,9 @@ import AppLayout from "./components/global/AppLayout.vue";
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-
+* {
+  scroll-behavior: smooth;
+}
 nav {
   padding: 30px;
 
@@ -28,5 +30,10 @@ nav {
 }
 .v-rating__wrapper {
   margin-right: 20px;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 </style>

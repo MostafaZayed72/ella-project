@@ -9,7 +9,12 @@ const routes = [
   {
     path: "/products/:category/:title",
     name: "products_category",
-    component: () => import("../views/ProductsCategory.vue"),
+    component: () => import("../views/ProductsCategory"),
+  },
+  {
+    path: "/products/product-details/:productId",
+    name: "product_details",
+    component: () => import("../views/ProductDetails"),
   },
 ];
 

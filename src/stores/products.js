@@ -35,6 +35,7 @@ export const productsModule = defineStore("productsModule", () => {
       rout: "womens-bags",
     },
   ]);
+  const singleProduct = ref("");
   const getProducts = async () => {
     const res = await axios.get("https://dummyjson.com/products");
     flashDeals.value = res.data.products.slice(0, 8);
@@ -58,8 +59,11 @@ export const productsModule = defineStore("productsModule", () => {
       `https://dummyjson.com/products/category/${category}`
     );
     categoryProducts.value = res.data;
+  };
+  const getSingleProduct = async (productId) => {
     console.log("Product");
-    console.log(res.data);
+    const res = await axios.get(`https://dummyjson.com/products/${productId}`);
+    singleProduct.value = res.data;
   };
 
   return {
@@ -72,5 +76,7 @@ export const productsModule = defineStore("productsModule", () => {
     categories,
     categoryProducts,
     getProductsByCategory,
+    singleProduct,
+    getSingleProduct,
   };
 });
