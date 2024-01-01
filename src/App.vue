@@ -5,7 +5,7 @@
 
 <script setup>
 import AppLayout from "./components/global/AppLayout.vue";
-import QuickView from "@/components/home_page/QuickView.vue";
+import QuickView from "@/components/global/QuickView.vue";
 </script>
 
 <style lang="scss">
@@ -15,9 +15,9 @@ import QuickView from "@/components/home_page/QuickView.vue";
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-* {
-  scroll-behavior: smooth;
-}
+// * {
+//   scroll-behavior: smooth;
+// }
 nav {
   padding: 30px;
 

@@ -1,15 +1,18 @@
 <script setup>
 import { ref, inject } from "vue";
-// import { productsModule } from "@/stores/products";
-// import { useRoute } from "vue-router";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
-// const route = useRoute();
+import { cartStore } from "@/stores/cart";
+const store = ref(cartStore());
 const Emitter = inject("Emitter");
 const tab = ref("");
 const quantity = ref(1);
 const loading = ref(false);
 const dialog = ref(false);
 const product = ref("");
+const addToCart = ref((item) => {
+  item.quantity = quantity.value;
+  store.value.addItem(item);
+});
 Emitter.on("openQuickView", (data) => {
   product.value = data;
   dialog.value = true;
@@ -158,6 +161,7 @@ Emitter.on("openQuickView", (data) => {
                       background-color: rgb(34, 34, 34);
                     "
                     height="50"
+                    @click="addToCart(product)"
                     >Add To Cart</v-btn
                   >
                 </v-card-actions>

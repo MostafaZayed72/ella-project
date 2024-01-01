@@ -54,14 +54,12 @@ export const productsModule = defineStore("productsModule", () => {
   };
 
   const getProductsByCategory = async (category) => {
-    console.log("Product");
     const res = await axios.get(
       `https://dummyjson.com/products/category/${category}`
     );
     categoryProducts.value = res.data;
   };
   const getSingleProduct = async (productId) => {
-    console.log("Product");
     const res = await axios.get(`https://dummyjson.com/products/${productId}`);
     singleProduct.value = res.data;
   };
