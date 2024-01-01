@@ -1,9 +1,11 @@
 <template>
   <app-layout> </app-layout>
+  <QuickView />
 </template>
 
 <script setup>
 import AppLayout from "./components/global/AppLayout.vue";
+import QuickView from "@/components/home_page/QuickView.vue";
 </script>
 
 <style lang="scss">

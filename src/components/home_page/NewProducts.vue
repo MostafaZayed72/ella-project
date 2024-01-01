@@ -2,7 +2,11 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import { Pagination } from "swiper";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
-import { defineProps, ref } from "vue";
+import { defineProps, ref, inject } from "vue";
+const Emitter = inject("Emitter");
+const openQuickView = ref((product) => {
+  Emitter.emit("openQuickView", product);
+});
 const props = defineProps({
   products: {
     type: Array,
@@ -42,7 +46,7 @@ const modules = ref([Pagination]);
               <v-card elevation="0" class="pb-5">
                 <v-hover v-slot="{ isHovering, props }">
                   <div
-                    class="img-parent"
+                    class="img-parent position-relative"
                     style="height: 160px; overflow: hidden"
                   >
                     <img
@@ -58,6 +62,25 @@ const modules = ref([Pagination]);
                       }; cursor:pointer`"
                       alt=""
                     />
+                    <v-btn
+                      width="60"
+                      height="30"
+                      variant="outlined"
+                      class="bg-white quick-view-btn"
+                      style="
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        text-transform: none;
+                        border-radius: 30px;
+                        font-size: 12px;
+                        transition: 0.2s all ease-in-out;
+                        opacity: 0;
+                      "
+                      @click="openQuickView(item)"
+                      >Quick View</v-btn
+                    >
                   </div>
                 </v-hover>
                 <v-card-text class="pl-0 pb-1"
@@ -137,29 +160,13 @@ const modules = ref([Pagination]);
     ></v-container>
   </div>
 </template>
+
 <style lang="scss">
-.products-swiper {
-  .swiper-button-next,
-  .swiper-button-prev {
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
-    border: 2px solid rgb(100, 96, 96);
-    background-color: white;
-    top: 30%;
-    &::after {
-      font-size: 13px;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: rgb(100, 96, 96);
-      font-weight: 900;
+.new-products {
+  .img-parent:hover {
+    .quick-view-btn {
+      opacity: 1 !important;
     }
-  }
-  .swiper-pagination-bullet {
-    width: 10px;
-    height: 10px;
   }
 }
 </style>

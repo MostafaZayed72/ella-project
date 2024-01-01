@@ -2,9 +2,9 @@
 import { ref, inject } from "vue";
 import { productsModule } from "@/stores/products";
 const Emitter = inject("Emitter");
-const openCart = () => {
+const openCart = ref(() => {
   Emitter.emit("openCart");
-};
+});
 const selectedLang = ref([
   {
     icon: `<svg

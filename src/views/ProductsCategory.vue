@@ -1,10 +1,14 @@
 <script setup>
 import { productsModule } from "@/stores/products";
-import { ref, watch } from "vue";
+import { ref, watch, inject } from "vue";
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
 
+const Emitter = inject("Emitter");
+const openQuickView = ref((product) => {
+  Emitter.emit("openQuickView", product);
+});
 const store = productsModule();
 const route = useRoute();
 const { categoryProducts } = storeToRefs(store);
@@ -52,7 +56,7 @@ watch(
               ><v-card elevation="0" class="pb-5 pt-5">
                 <v-hover v-slot="{ isHovering, props }">
                   <div
-                    class="img-parent"
+                    class="img-parent position-relative"
                     style="height: 160px; overflow: hidden"
                   >
                     <img
@@ -68,6 +72,25 @@ watch(
                       }; cursor:pointer`"
                       alt=""
                     />
+                    <v-btn
+                      width="90"
+                      height="30"
+                      variant="outlined"
+                      class="bg-white quick-view-btn"
+                      style="
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        text-transform: none;
+                        border-radius: 30px;
+                        font-size: 12px;
+                        transition: 0.2s all ease-in-out;
+                        opacity: 0;
+                      "
+                      @click="openQuickView(item)"
+                      >Quick View</v-btn
+                    >
                   </div>
                 </v-hover>
                 <v-card-text class="pl-0 pb-1" style="height: 75px"
@@ -140,3 +163,13 @@ watch(
     </v-container>
   </div>
 </template>
+
+<style lang="scss">
+.products-category {
+  .img-parent:hover {
+    .quick-view-btn {
+      opacity: 1 !important;
+    }
+  }
+}
+</style>

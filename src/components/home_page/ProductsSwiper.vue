@@ -2,7 +2,11 @@
 import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import { Pagination, Navigation, Autoplay } from "swiper";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
-import { defineProps, ref } from "vue";
+import { defineProps, ref, inject } from "vue";
+const Emitter = inject("Emitter");
+const openQuickView = ref((product) => {
+  Emitter.emit("openQuickView", product);
+});
 const props = defineProps({
   products: {
     type: Array,
@@ -53,7 +57,10 @@ const modules = ref([Pagination, Navigation, Autoplay]);
       <swiper-slide v-for="item in props.products" :key="item.id">
         <v-card elevation="0" class="pb-5" height="350">
           <v-hover v-slot="{ isHovering, props }">
-            <div class="img-parent" style="height: 200px; overflow: hidden">
+            <div
+              class="img-parent position-relative"
+              style="height: 200px; overflow: hidden"
+            >
               <img
                 :src="
                   shownItem[item.title] ? shownItem[item.title] : item.thumbnail
@@ -65,6 +72,25 @@ const modules = ref([Pagination, Navigation, Autoplay]);
                 }; cursor:pointer`"
                 alt=""
               />
+              <v-btn
+                width="60"
+                height="30"
+                variant="outlined"
+                class="bg-white quick-view-btn"
+                style="
+                  position: absolute;
+                  left: 50%;
+                  top: 50%;
+                  transform: translate(-50%, -50%);
+                  text-transform: none;
+                  border-radius: 30px;
+                  font-size: 12px;
+                  transition: 0.2s all ease-in-out;
+                  opacity: 0;
+                "
+                @click="openQuickView(item)"
+                >Quick View</v-btn
+              >
             </div>
           </v-hover>
           <v-card-text class="pl-0 pb-1"
@@ -158,6 +184,11 @@ const modules = ref([Pagination, Navigation, Autoplay]);
   .swiper-pagination-bullet {
     width: 10px;
     height: 10px;
+  }
+  .img-parent:hover {
+    .quick-view-btn {
+      opacity: 1 !important;
+    }
   }
 }
 </style>

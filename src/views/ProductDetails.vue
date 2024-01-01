@@ -122,7 +122,16 @@ getSingleProduct();
               />
               <v-icon size="22" @click="quantity++">mdi-plus</v-icon>
             </div>
-            <v-card-actions class="mt-7 w-100 px-0">
+            <v-card-text class="px-0"
+              >Subtotal: ${{
+                Math.ceil(
+                  store.singleProduct.price -
+                    store.singleProduct.price *
+                      (store.singleProduct.discountPercentage / 100)
+                ) * quantity
+              }}</v-card-text
+            >
+            <v-card-actions class="mt-2 w-100 px-0">
               <v-btn
                 variant="outlined"
                 class="w-75 text-white"
