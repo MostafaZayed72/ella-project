@@ -1,11 +1,25 @@
 <template>
   <app-layout> </app-layout>
   <QuickView />
+  <v-snackbar v-model="bar" location="left bottom" max-width="300"
+    >{{ itemTitle }} has been added to your cart successfully!
+    <template v-slot:actions
+      ><v-icon @click="bar = false">mdi-close</v-icon>
+    </template></v-snackbar
+  >
 </template>
 
 <script setup>
+import { ref, inject } from "vue";
 import AppLayout from "./components/global/AppLayout.vue";
 import QuickView from "@/components/global/QuickView.vue";
+const bar = ref(false);
+const itemTitle = ref("");
+const Emitter = inject("Emitter");
+Emitter.on("showMsg", (data) => {
+  itemTitle.value = data;
+  bar.value = true;
+});
 </script>
 
 <style lang="scss">

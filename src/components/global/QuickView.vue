@@ -7,11 +7,19 @@ const Emitter = inject("Emitter");
 const tab = ref("");
 const quantity = ref(1);
 const loading = ref(false);
+const btnLoading = ref(false);
 const dialog = ref(false);
 const product = ref("");
 const addToCart = ref((item) => {
   item.quantity = quantity.value;
   store.value.addItem(item);
+  btnLoading.value = true;
+  setTimeout(() => {
+    btnLoading.value = false;
+    Emitter.emit("openCart");
+    Emitter.emit("showMsg", item.title);
+    dialog.value = false;
+  }, 1000);
 });
 Emitter.on("openQuickView", (data) => {
   product.value = data;
@@ -48,7 +56,7 @@ Emitter.on("openQuickView", (data) => {
                 height="400"
                 alt=""
               />
-              <v-tabs center-active height="220" v-model="tab">
+              <v-tabs center-active height="130" v-model="tab">
                 <v-tab
                   v-for="(img, i) in product.images"
                   :key="i"
@@ -162,6 +170,7 @@ Emitter.on("openQuickView", (data) => {
                     "
                     height="50"
                     @click="addToCart(product)"
+                    :loading="btnLoading"
                     >Add To Cart</v-btn
                   >
                 </v-card-actions>

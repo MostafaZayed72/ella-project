@@ -1,13 +1,17 @@
 <script setup>
-import { ref } from "vue";
+import { ref, inject } from "vue";
 import { productsModule } from "@/stores/products";
 import { useRoute } from "vue-router";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
+import { cartStore } from "@/stores/cart";
+const storeCart = ref(cartStore());
 const route = useRoute();
+const Emitter = inject("Emitter");
 const store = productsModule();
 const tab = ref("");
 const quantity = ref(1);
 const loading = ref(false);
+const btnLoading = ref(false);
 const getSingleProduct = async () => {
   try {
     loading.value = true;
@@ -18,6 +22,16 @@ const getSingleProduct = async () => {
   }
 };
 getSingleProduct();
+const addToCart = ref((item) => {
+  item.quantity = quantity.value;
+  storeCart.value.addItem(item);
+  btnLoading.value = true;
+  setTimeout(() => {
+    btnLoading.value = false;
+    Emitter.emit("openCart");
+    Emitter.emit("showMsg", item.title);
+  }, 1000);
+});
 </script>
 
 <template>
@@ -140,7 +154,9 @@ getSingleProduct();
                   border-radius: 30px;
                   background-color: rgb(34, 34, 34);
                 "
+                :loading="btnLoading"
                 height="50"
+                @click="addToCart(store.singleProduct)"
                 >Add To Cart</v-btn
               >
             </v-card-actions>

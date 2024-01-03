@@ -1,6 +1,8 @@
 <script setup>
 import { ref, inject } from "vue";
 import { productsModule } from "@/stores/products";
+import { cartStore } from "@/stores/cart";
+const storeCart = cartStore();
 const Emitter = inject("Emitter");
 const openCart = ref(() => {
   Emitter.emit("openCart");
@@ -298,7 +300,7 @@ const categories = ref(store.categories);
               >
                 <v-badge
                   location="right top"
-                  content="2"
+                  :content="storeCart.cartItems.length"
                   color="red"
                   offsetX="-14"
                 ></v-badge>

@@ -23,7 +23,7 @@ export const cartStore = defineStore("cartStore", () => {
     }
     console.log(cartItems.value);
   };
-  const deleteItems = (id) => {
+  const deleteItem = (id) => {
     for (let i = 0; i < cartItems.value.length; i++) {
       if (cartItems.value[i].id == id) {
         cartItems.value.splice(i, 1);
@@ -37,6 +37,6 @@ export const cartStore = defineStore("cartStore", () => {
     cartItems,
     addItem,
     getCartItems,
-    deleteItems,
+    deleteItem,
   };
 });
