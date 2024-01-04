@@ -1,6 +1,8 @@
 <script setup>
 import { computed, ref } from "vue";
 import { cartStore } from "@/stores/cart";
+import { useRouter } from "vue-router";
+const router = useRouter();
 const store = cartStore();
 const countries = ref(["Egypt", "Tunisia", "Palestine", " Lebanon", "Syria"]);
 const calcTotalPrice = computed(() => {
@@ -13,6 +15,10 @@ const calcTotalPrice = computed(() => {
   });
   return total;
 });
+const toCheckout = () => {
+  store.setToLocalStorage();
+  router.push({ name: "check_out" });
+};
 </script>
 
 <template>
@@ -36,16 +42,19 @@ const calcTotalPrice = computed(() => {
             class="bar-parent mt-3 position-relative mr-2"
             v-if="store.cartItems.length"
           >
-            <div
-              class="free-shipping-main"
-              v-if="(calcTotalPrice / 10000) * 100 < 100"
-            >
-              <svg
-                class="icon-shipping-truck"
-                viewBox="0 0 40.55 24"
-                width="30"
-                fill="#F44336"
-                :style="`position: absolute;
+            <svg
+              class="icon-shipping-truck"
+              viewBox="0 0 40.55 24"
+              width="30"
+              :fill="
+                parseInt((calcTotalPrice / 10000) * 100) < 50
+                  ? 'red'
+                  : parseInt((calcTotalPrice / 10000) * 100) > 50 &&
+                    parseInt((calcTotalPrice / 10000) * 100) < 100
+                  ? 'orange'
+                  : 'green'
+              "
+              :style="`position: absolute;
               bottom: 50%;
               z-index: 1;
               left: calc(${parseInt(
@@ -54,89 +63,49 @@ const calcTotalPrice = computed(() => {
                   : 100
               )}% - 30px);
               transition: 0.2s all ease-in-out;`"
-              >
-                <g id="Layer_2" data-name="Layer 2">
-                  <g id="Layer_1-2" data-name="Layer 1">
-                    <path
-                      class="truck-body"
-                      d="M40.43,11a3.86,3.86,0,0,0-3.68-2.65H28a1.25,1.25,0,0,1-1.43-1.43c0-2.18,0-4.35,0-6.53,0-.31-.08-.36-.37-.36H5.11a1.18,1.18,0,0,0-1.3,1.32c0,.74,0,1.48,0,2.22,0,.21-.06.27-.26.26-.36,0-.71,0-1.07,0a1.19,1.19,0,1,0,0,2.37H7.19c.43,0,.85,0,1.27,0a1,1,0,0,1,1.07,1A1.19,1.19,0,0,1,8.24,8.48H1.35a1.83,1.83,0,0,0-.47,0A1.19,1.19,0,0,0,0,9.85a1.18,1.18,0,0,0,1.19,1h9.66c.34,0,.68,0,1,0A1.19,1.19,0,0,1,13,12.47a1.26,1.26,0,0,1-1.26.76H1.24a1.19,1.19,0,1,0,0,2.38c.76,0,1.51,0,2.26,0,.26,0,.33.07.32.32,0,1,0,2.09,0,3.13A1.18,1.18,0,0,0,5.1,20.36c.63,0,1.26,0,1.9,0,.27,0,.39.06.47.36a4.55,4.55,0,0,0,8.78-.11.29.29,0,0,1,.32-.25H28.09a.3.3,0,0,1,.34.27,4.55,4.55,0,0,0,8.8,0,.31.31,0,0,1,.35-.26c.49,0,1,0,1.47,0a1.37,1.37,0,0,0,1.5-.87V11.41C40.41,11.29,40.47,11.12,40.43,11ZM32.84,21.62A2.18,2.18,0,1,1,35,19.45,2.21,2.21,0,0,1,32.84,21.62Zm-21,0A2.18,2.18,0,1,1,14,19.45,2.2,2.2,0,0,1,11.86,21.62Z"
-                    ></path>
-                    <path
-                      class="truck-body"
-                      d="M29.27,6h5.85c.1,0,.2,0,.29,0C33.64,2.72,32,.91,28.91.26V.57c0,1.68,0,3.35,0,5C28.9,5.9,29,6,29.27,6Z"
-                    ></path>
-                    <path
-                      class="wheel"
-                      fill="white"
-                      d="M11.87,17.27A2.18,2.18,0,1,0,14,19.45,2.2,2.2,0,0,0,11.87,17.27Z"
-                    ></path>
-                    <path
-                      class="wheel"
-                      fill="white"
-                      d="M32.85,17.27A2.18,2.18,0,1,0,35,19.45,2.22,2.22,0,0,0,32.85,17.27Z"
-                    ></path>
-                  </g>
+            >
+              <g id="Layer_2" data-name="Layer 2">
+                <g id="Layer_1-2" data-name="Layer 1">
+                  <path
+                    class="truck-body"
+                    d="M40.43,11a3.86,3.86,0,0,0-3.68-2.65H28a1.25,1.25,0,0,1-1.43-1.43c0-2.18,0-4.35,0-6.53,0-.31-.08-.36-.37-.36H5.11a1.18,1.18,0,0,0-1.3,1.32c0,.74,0,1.48,0,2.22,0,.21-.06.27-.26.26-.36,0-.71,0-1.07,0a1.19,1.19,0,1,0,0,2.37H7.19c.43,0,.85,0,1.27,0a1,1,0,0,1,1.07,1A1.19,1.19,0,0,1,8.24,8.48H1.35a1.83,1.83,0,0,0-.47,0A1.19,1.19,0,0,0,0,9.85a1.18,1.18,0,0,0,1.19,1h9.66c.34,0,.68,0,1,0A1.19,1.19,0,0,1,13,12.47a1.26,1.26,0,0,1-1.26.76H1.24a1.19,1.19,0,1,0,0,2.38c.76,0,1.51,0,2.26,0,.26,0,.33.07.32.32,0,1,0,2.09,0,3.13A1.18,1.18,0,0,0,5.1,20.36c.63,0,1.26,0,1.9,0,.27,0,.39.06.47.36a4.55,4.55,0,0,0,8.78-.11.29.29,0,0,1,.32-.25H28.09a.3.3,0,0,1,.34.27,4.55,4.55,0,0,0,8.8,0,.31.31,0,0,1,.35-.26c.49,0,1,0,1.47,0a1.37,1.37,0,0,0,1.5-.87V11.41C40.41,11.29,40.47,11.12,40.43,11ZM32.84,21.62A2.18,2.18,0,1,1,35,19.45,2.21,2.21,0,0,1,32.84,21.62Zm-21,0A2.18,2.18,0,1,1,14,19.45,2.2,2.2,0,0,1,11.86,21.62Z"
+                  ></path>
+                  <path
+                    class="truck-body"
+                    d="M29.27,6h5.85c.1,0,.2,0,.29,0C33.64,2.72,32,.91,28.91.26V.57c0,1.68,0,3.35,0,5C28.9,5.9,29,6,29.27,6Z"
+                  ></path>
+                  <path
+                    class="wheel"
+                    fill="white"
+                    d="M11.87,17.27A2.18,2.18,0,1,0,14,19.45,2.2,2.2,0,0,0,11.87,17.27Z"
+                  ></path>
+                  <path
+                    class="wheel"
+                    fill="white"
+                    d="M32.85,17.27A2.18,2.18,0,1,0,35,19.45,2.22,2.22,0,0,0,32.85,17.27Z"
+                  ></path>
                 </g>
-              </svg>
-              <v-progress-linear
-                color="red"
-                height="10"
-                :model-value="
-                  parseInt(
-                    (calcTotalPrice / 10000) * 100 <= 100
-                      ? (calcTotalPrice / 10000) * 100
-                      : 100
-                  )
-                "
-                striped
-              ></v-progress-linear>
-            </div>
-            <div class="free-shipping" v-else>
-              <svg
-                class="icon-shipping-truck"
-                viewBox="0 0 40.55 24"
-                width="30"
-                fill="green"
-                :style="`position: absolute;
-                bottom: 50%;
-                z-index: 1;
-                left: calc(${parseInt(
+              </g>
+            </svg>
+            <v-progress-linear
+              :color="
+                parseInt((calcTotalPrice / 10000) * 100) < 50
+                  ? 'red'
+                  : parseInt((calcTotalPrice / 10000) * 100) > 50 &&
+                    parseInt((calcTotalPrice / 10000) * 100) < 100
+                  ? 'orange'
+                  : 'green'
+              "
+              height="10"
+              :model-value="
+                parseInt(
                   (calcTotalPrice / 10000) * 100 <= 100
                     ? (calcTotalPrice / 10000) * 100
                     : 100
-                )}% - 30px);
-                transition: 0.2s all ease-in-out;`"
-              >
-                <g id="Layer_2" data-name="Layer 2">
-                  <g id="Layer_1-2" data-name="Layer 1">
-                    <path
-                      class="truck-body"
-                      d="M40.43,11a3.86,3.86,0,0,0-3.68-2.65H28a1.25,1.25,0,0,1-1.43-1.43c0-2.18,0-4.35,0-6.53,0-.31-.08-.36-.37-.36H5.11a1.18,1.18,0,0,0-1.3,1.32c0,.74,0,1.48,0,2.22,0,.21-.06.27-.26.26-.36,0-.71,0-1.07,0a1.19,1.19,0,1,0,0,2.37H7.19c.43,0,.85,0,1.27,0a1,1,0,0,1,1.07,1A1.19,1.19,0,0,1,8.24,8.48H1.35a1.83,1.83,0,0,0-.47,0A1.19,1.19,0,0,0,0,9.85a1.18,1.18,0,0,0,1.19,1h9.66c.34,0,.68,0,1,0A1.19,1.19,0,0,1,13,12.47a1.26,1.26,0,0,1-1.26.76H1.24a1.19,1.19,0,1,0,0,2.38c.76,0,1.51,0,2.26,0,.26,0,.33.07.32.32,0,1,0,2.09,0,3.13A1.18,1.18,0,0,0,5.1,20.36c.63,0,1.26,0,1.9,0,.27,0,.39.06.47.36a4.55,4.55,0,0,0,8.78-.11.29.29,0,0,1,.32-.25H28.09a.3.3,0,0,1,.34.27,4.55,4.55,0,0,0,8.8,0,.31.31,0,0,1,.35-.26c.49,0,1,0,1.47,0a1.37,1.37,0,0,0,1.5-.87V11.41C40.41,11.29,40.47,11.12,40.43,11ZM32.84,21.62A2.18,2.18,0,1,1,35,19.45,2.21,2.21,0,0,1,32.84,21.62Zm-21,0A2.18,2.18,0,1,1,14,19.45,2.2,2.2,0,0,1,11.86,21.62Z"
-                    ></path>
-                    <path
-                      class="truck-body"
-                      d="M29.27,6h5.85c.1,0,.2,0,.29,0C33.64,2.72,32,.91,28.91.26V.57c0,1.68,0,3.35,0,5C28.9,5.9,29,6,29.27,6Z"
-                    ></path>
-                    <path
-                      class="wheel"
-                      fill="white"
-                      d="M11.87,17.27A2.18,2.18,0,1,0,14,19.45,2.2,2.2,0,0,0,11.87,17.27Z"
-                    ></path>
-                    <path
-                      class="wheel"
-                      fill="white"
-                      d="M32.85,17.27A2.18,2.18,0,1,0,35,19.45,2.22,2.22,0,0,0,32.85,17.27Z"
-                    ></path>
-                  </g>
-                </g>
-              </svg>
-              <v-progress-linear
-                color="green"
-                height="10"
-                :model-value="parseInt((calcTotalPrice / 10000) * 100)"
-                striped
-              ></v-progress-linear>
-            </div>
+                )
+              "
+              striped
+            ></v-progress-linear>
           </div>
           <v-card-text
             class="px-0 pt-2"
@@ -146,12 +115,39 @@ const calcTotalPrice = computed(() => {
             shipping</v-card-text
           ><v-card-text
             class="px-0 pt-2"
+            style="color: #6f6f6f"
+            v-if="!store.cartItems.length"
+            >Free shipping for all orders over $10000 </v-card-text
+          ><v-card-text
+            class="px-0 pt-2"
             style="color: #169206; font-weight: bold"
-            v-else
+            v-if="store.cartItems.length && 10000 - calcTotalPrice <= 100"
           >
             Your order now is included free shipping</v-card-text
+          ><v-card-text
+            class="px-0 pt-2 text-center mt-5"
+            style="color: #6f6f6f"
+            v-if="!store.cartItems.length"
+          >
+            Your cart is empty</v-card-text
+          ><v-card-actions class="px-0 justify-center"
+            ><v-btn
+              v-if="!store.cartItems.length"
+              style="
+                text-transform: none;
+                border-radius: 30px;
+                border-color: rgb(199, 199, 199);
+              "
+              variant="outlined"
+              height="45"
+              class="mx-0"
+              width="300"
+              elevation="0"
+              @click="$router.push({ name: 'home' })"
+              >Continue Shopping</v-btn
+            ></v-card-actions
           ></v-col
-        ><v-col cols="8" class="px-3">
+        ><v-col cols="8" class="px-3" v-if="store.cartItems.length">
           <v-table class="w-100"
             ><thead>
               <tr>
@@ -259,8 +255,11 @@ const calcTotalPrice = computed(() => {
                 </td>
               </tr>
             </tbody></v-table
+          ><v-divider length="100%" color="black"></v-divider
+          ><v-divider length="100%" color="black"></v-divider
+          ><v-divider length="100%" color="black"></v-divider
           ><v-card-text
-            class="px-0 pt-2 d-flex align-center"
+            class="px-0 pt-2 d-flex align-center mt-4"
             style="color: #6f6f6f; gap: 10px"
             v-if="store.cartItems.length"
           >
@@ -289,7 +288,7 @@ const calcTotalPrice = computed(() => {
             alt=""
           />
         </v-col>
-        <v-col cols="4" class="px-3"
+        <v-col cols="4" class="px-3" v-if="store.cartItems.length"
           ><v-card elevation="0"
             ><v-card-title style="font-size: 14px; font-weight: bold"
               >ORDER SUMMARY</v-card-title
@@ -388,6 +387,7 @@ const calcTotalPrice = computed(() => {
                 class="w-100 mx-0"
                 elevation="0"
                 color="blue"
+                @click="toCheckout"
                 >Proceed To CheckOut</v-btn
               >
               <v-btn

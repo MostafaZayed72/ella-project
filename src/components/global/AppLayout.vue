@@ -2,14 +2,16 @@
   <div class="layout">
     <v-layout class="position-relative">
       <CardDrawer />
-      <AppNav />
-      <FixedNav />
-      <v-main style="padding-top: 160px">
+      <v-main
+        :style="`padding-top: ${$route.name == 'check_out' ? '0px' : '150px'}`"
+      >
         <RouterView v-slot="{ Component, route }">
           <component :is="Component" :key="route.name" />
         </RouterView>
       </v-main>
-      <app-footer />
+      <AppNav v-if="$route.name != 'check_out'" />
+      <FixedNav v-if="$route.name != 'check_out'" />
+      <AppFooter v-if="$route.name != 'check_out'" />
     </v-layout>
   </div>
 </template>
