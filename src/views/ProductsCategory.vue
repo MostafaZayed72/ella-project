@@ -16,26 +16,28 @@ const shownItem = ref({});
 const loading = ref(false);
 
 const getProducts = async () => {
-  try {
-    document.documentElement.scrollTo(0, 0);
-    loading.value = true;
-    await store.getProductsByCategory(route.params.category);
-    loading.value = false;
-  } catch (error) {
-    console.log(error);
+  if (route.name == "products_category") {
+    try {
+      document.documentElement.scrollTo(0, 0);
+      loading.value = true;
+      await store.getProductsByCategory(route.query.category);
+      loading.value = false;
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 getProducts();
 
 watch(
-  () => route.params.category,
+  () => route.query.category,
   () => getProducts()
 );
 </script>
 
 <template>
   <div class="products-category mt-10">
-    <h1 class="text-center">{{ route.params.title }}</h1>
+    <h1 class="text-center">{{ route.query.title }}</h1>
     <v-container>
       <v-card :loading="loading" elevation="0" class="pt-5" min-height="700px">
         <v-row v-if="loading">

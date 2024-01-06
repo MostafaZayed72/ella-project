@@ -44,7 +44,7 @@ const modules = ref([Pagination, Navigation, Autoplay]);
         style="font-size: 14px"
         :to="{
           name: 'products_category',
-          params: {
+          query: {
             title: store.categories[index].title,
             category: store.categories[index].rout,
           },
@@ -172,7 +172,7 @@ const modules = ref([Pagination, Navigation, Autoplay]);
             @click="
               $router.push({
                 name: 'product_details',
-                params: { productId: item.id },
+                query: { productId: item.id },
               })
             "
             >Choose Options</v-btn

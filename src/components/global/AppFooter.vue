@@ -278,7 +278,7 @@ const svgs = ref([
                 ><router-link
                   :to="{
                     name: 'products_category',
-                    params: {
+                    query: {
                       category: category.rout,
                       title: category.title,
                     },

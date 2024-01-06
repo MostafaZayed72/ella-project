@@ -339,7 +339,7 @@ const categories = ref(store.categories);
                 <router-link
                   :to="{
                     name: 'products_category',
-                    params: {
+                    query: {
                       category: category.rout,
                       title: category.title,
                     },

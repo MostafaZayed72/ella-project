@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import { Pagination } from "swiper";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
 import { defineProps, ref, inject } from "vue";
+import { productsModule } from "@/stores/products";
+const store = productsModule();
 const Emitter = inject("Emitter");
 const openQuickView = ref((product) => {
   Emitter.emit("openQuickView", product);
@@ -29,11 +31,22 @@ const modules = ref([Pagination]);
 </script>
 <template>
   <div class="new-products pt-12">
-    <div class="title d-flex align-center justify-space-between">
-      <h2 style="font-weight: 900; font-size: 30px" class="mb-10 px-5">
+    <div class="title d-flex align-center justify-space-between px-5">
+      <h2 style="font-weight: 900; font-size: 30px" class="mb-10">
         New Products
       </h2>
-      <a href="#" class="mr-5 text-black" style="font-size: 14px">Shop All</a>
+      <router-link
+        class="text-black"
+        style="font-size: 14px"
+        :to="{
+          name: 'products_category',
+          query: {
+            title: store.categories[index].title,
+            category: store.categories[index].rout,
+          },
+        }"
+        >Shop All</router-link
+      >
     </div>
     <v-container fluid
       ><v-row>
