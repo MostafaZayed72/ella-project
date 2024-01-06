@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from "vue-awesome-swiper";
 import { Pagination, Navigation, Autoplay } from "swiper";
 import { VSkeletonLoader } from "vuetify/lib/components/index.mjs";
 import { defineProps, ref, inject } from "vue";
+import { productsModule } from "@/stores/products";
+const store = productsModule();
 const Emitter = inject("Emitter");
 const openQuickView = ref((product) => {
   Emitter.emit("openQuickView", product);
@@ -16,6 +18,12 @@ const props = defineProps({
   },
   titleColor: {
     type: String,
+  },
+  routeCategory: {
+    type: String,
+  },
+  index: {
+    type: Number,
   },
 });
 const shownItem = ref({});
@@ -31,7 +39,18 @@ const modules = ref([Pagination, Navigation, Autoplay]);
       >
         {{ props.title }}
       </h2>
-      <a href="#" class="mr-5 text-black" style="font-size: 14px">Shop All</a>
+      <router-link
+        class="text-black"
+        style="font-size: 14px"
+        :to="{
+          name: 'products_category',
+          params: {
+            title: store.categories[index].title,
+            category: store.categories[index].rout,
+          },
+        }"
+        >Shop All</router-link
+      >
     </div>
     <v-container v-if="!products.length" fluid>
       <v-row
@@ -51,7 +70,12 @@ const modules = ref([Pagination, Navigation, Autoplay]);
       :slides-per-view="4"
       :space-between="35"
       class="pb-9 px-5"
-      :autoplay="{ delay: 3000 }"
+      :autoplay="{
+        delay: 3000,
+        pauseOnMouseEnter: true,
+        disableOnInteraction: false,
+      }"
+      :loop="true"
       :navigation="{ prevIcon: '.swiper-prev', nextIcon: '.swiper-next' }"
     >
       <swiper-slide v-for="item in props.products" :key="item.id">
@@ -120,6 +144,7 @@ const modules = ref([Pagination, Navigation, Autoplay]);
           >
           <v-btn-toggle
             v-model="shownItem[item.title]"
+            mandatory
             class="d-flex align-center justify-center"
           >
             <v-btn

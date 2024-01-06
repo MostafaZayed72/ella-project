@@ -23,8 +23,8 @@ export const productsModule = defineStore("productsModule", () => {
       rout: "furniture",
     },
     {
-      title: "Men's Shoes",
-      rout: "mens-shoes",
+      title: "Fragrances",
+      rout: "fragrances",
     },
     {
       title: "Men's Watches",
@@ -33,6 +33,10 @@ export const productsModule = defineStore("productsModule", () => {
     {
       title: "Women's Bags",
       rout: "womens-bags",
+    },
+    {
+      title: "Groceries",
+      rout: "groceries",
     },
   ]);
   const singleProduct = ref("");

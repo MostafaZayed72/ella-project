@@ -24,14 +24,16 @@ onMounted(async () => {
       :products="store.flashDeals"
       title="Flash Deals"
       titleColor="red-darken-3"
+      :index="0"
     />
     <TopCategories />
-    <NewProducts :products="store.newProducts" />
+    <NewProducts :products="store.newProducts" :index="1" />
     <QualityFeatures />
     <ProductsComponent
       :products="store.mobilePhones"
       title="Top Mobile Phones"
       titleColor="#404040"
+      :index="0"
     />
     <v-container fluid>
       <v-row>
@@ -55,12 +57,14 @@ onMounted(async () => {
       :products="store.fragrances"
       title="Top Fragrances"
       titleColor="#404040"
+      :index="3"
     />
     <img src="@/assets/images/tv-banner.webp" class="w-100" alt="" />
     <ProductsComponent
       :products="store.groceries"
       title="Top Groceries"
       titleColor="#404040"
+      :index="6"
     />
     <ShopWithus />
   </div>

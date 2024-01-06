@@ -11,6 +11,18 @@ const props = defineProps({
   products: {
     type: Array,
   },
+  title: {
+    type: String,
+  },
+  titleColor: {
+    type: String,
+  },
+  routeCategory: {
+    type: String,
+  },
+  index: {
+    type: Number,
+  },
 });
 const shownItem = ref({});
 const modules = ref([Pagination]);
@@ -113,6 +125,7 @@ const modules = ref([Pagination]);
                 >
                 <v-btn-toggle
                   v-model="shownItem[item.title]"
+                  mandatory
                   class="d-flex align-center justify-center"
                 >
                   <v-btn
