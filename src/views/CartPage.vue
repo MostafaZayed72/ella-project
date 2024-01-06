@@ -364,7 +364,7 @@ const toCheckout = () => {
                 class="w-100"
                 color="blue"
                 elevation="0"
-                >Check Out</v-btn
+                >Calculate Shipping</v-btn
               ></v-card-actions
             ><v-divider length="100%" color="black"></v-divider
             ><v-divider length="100%" color="black"></v-divider

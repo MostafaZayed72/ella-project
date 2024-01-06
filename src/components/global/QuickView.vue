@@ -28,7 +28,7 @@ Emitter.on("openQuickView", (data) => {
 </script>
 
 <template>
-  <div class="quick-view mt-16">
+  <div class="quick-view">
     <v-dialog v-model="dialog" max-width="900" max-height="500">
       <v-icon
         style="

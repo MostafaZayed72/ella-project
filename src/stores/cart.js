@@ -34,6 +34,10 @@ export const cartStore = defineStore("cartStore", () => {
   const setToLocalStorage = () => {
     localStorage.setItem("cart-items", JSON.stringify(cartItems.value));
   };
+  const resetItems = () => {
+    cartItems.value = [];
+    localStorage.removeItem("cart-items");
+  };
 
   return {
     cartStore,
@@ -42,5 +46,6 @@ export const cartStore = defineStore("cartStore", () => {
     getCartItems,
     deleteItem,
     setToLocalStorage,
+    resetItems,
   };
 });
