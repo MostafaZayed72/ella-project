@@ -193,12 +193,15 @@ const langs = ref([
 ]);
 const store = productsModule();
 const categories = ref(store.categories);
+const openMenu = ref(() => {
+  Emitter.emit("openMenu");
+});
 </script>
 
 <template>
   <div class="nav-bar">
     <v-app-bar color="#02218f" height="fit-content" class="pt-3" absolute>
-      <v-app-bar-nav-icon @click="openCart"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon @click="openMenu"></v-app-bar-nav-icon>
       <v-container fluid>
         <v-row>
           <v-col cols="3">
