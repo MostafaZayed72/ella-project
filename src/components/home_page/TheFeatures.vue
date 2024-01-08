@@ -2,8 +2,10 @@
   <div class="features">
     <v-container>
       <v-row>
-        <v-col>
-          <div class="parent d-flex align-center justify-center">
+        <v-col cols="12" sm="6" md="4" lg="4">
+          <div
+            class="parent d-flex align-center justify-center flex-column flex-sm-row"
+          >
             <svg
               aria-hidden="true"
               focusable="false"
@@ -12,7 +14,7 @@
               role="img"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 640 512"
-              class="svg-inline--fa fa-shipping-fast fa-w-20 fa-3x mr-5"
+              class="svg-inline--fa fa-shipping-fast fa-w-20 fa-3x mr-5 mb-5 mb-sm-0"
               style="width: 25px"
             >
               <path
@@ -24,8 +26,10 @@
             <span>Free Shipping & Returns</span>
           </div>
         </v-col>
-        <v-col
-          ><div class="parent d-flex align-center justify-center second">
+        <v-col cols="12" sm="6" md="4" lg="4"
+          ><div
+            class="parent d-flex align-center justify-center second flex-column flex-sm-row mb-5 mb-sm-0"
+          >
             <svg
               aria-hidden="true"
               focusable="false"
@@ -46,8 +50,10 @@
             <span>Lowest Price Guarantee</span>
           </div></v-col
         >
-        <v-col
-          ><div class="parent d-flex align-center justify-center">
+        <v-col cols="12" sm="6" md="4" lg="4"
+          ><div
+            class="parent d-flex align-center justify-center flex-column flex-sm-row mb-5 mb-sm-0"
+          >
             <svg
               aria-hidden="true"
               focusable="false"
@@ -95,6 +101,17 @@
       transform: translateY(-50%);
       width: 1px;
       height: 70%;
+    }
+  }
+}
+//Media Queries
+@media (max-width: 600px) {
+  .features {
+    .second {
+      &::before,
+      &::after {
+        display: none;
+      }
     }
   }
 }
