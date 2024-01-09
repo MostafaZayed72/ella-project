@@ -15,8 +15,8 @@ const openMenu = ref(() => {
   <div class="res_nav">
     <v-app-bar
       ><v-container
-        ><v-row class="align-center"
-          ><v-col cols="4" class="d-flex align-center"
+        ><v-row class="align-center row-one"
+          ><v-col cols="4" class="d-flex align-center col1"
             ><v-app-bar-nav-icon @click="openMenu"></v-app-bar-nav-icon
             ><svg
               data-icon="search"
@@ -71,3 +71,12 @@ const openMenu = ref(() => {
     ></v-app-bar>
   </div>
 </template>
+<!-- <style lang="scss">
+@media (max-width: 600px) {
+  .res_nav {
+    .row-one {
+      width: 65%;
+    }
+  }
+}
+</style> -->
