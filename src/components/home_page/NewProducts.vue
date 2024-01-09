@@ -28,6 +28,11 @@ const props = defineProps({
 });
 const shownItem = ref({});
 const modules = ref([Pagination]);
+const breakpoints = ref({
+  0: { slidesPerView: 1 },
+  580: { slidesPerView: 2 },
+  1024: { slidesPerView: 3 },
+});
 </script>
 <template>
   <div class="new-products pt-12">
@@ -59,13 +64,14 @@ const modules = ref([Pagination]);
             </v-col>
           </v-row>
         </v-col>
-        <v-col cols="7" class="pt-16">
+        <v-col cols="12" md="7" class="pt-16 order-1 order-md-0">
           <Swiper
             :pagination="{ el: '.swiper-pagination', clickable: true }"
             :modules="modules"
             :slides-per-view="3"
             :space-between="20"
             class="pb-9 px-5"
+            :breakpoints="breakpoints"
           >
             <swiper-slide v-for="item in props.products" :key="item.id">
               <v-card elevation="0" class="pb-5">
@@ -178,7 +184,7 @@ const modules = ref([Pagination]);
             <div class="swiper-pagination"></div>
           </Swiper>
         </v-col>
-        <v-col cols="5"
+        <v-col cols="12" md="5"
           ><img
             src="@/assets/images/vr-banner.webp"
             class="w-100"
@@ -192,6 +198,13 @@ const modules = ref([Pagination]);
   .img-parent:hover {
     .quick-view-btn {
       opacity: 1 !important;
+    }
+  }
+}
+@media (max-width: 580px) {
+  .new-products {
+    .img-parent {
+      height: 300px !important;
     }
   }
 }

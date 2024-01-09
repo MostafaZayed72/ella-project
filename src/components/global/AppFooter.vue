@@ -266,7 +266,7 @@ const svgs = ref([
     <v-footer :app="true" color="grey-lighten-4" absolute class="pt-14">
       <v-container fluid class="px-0">
         <v-row>
-          <v-col cols="3">
+          <v-col cols="12" sm="6" md="4" lg="3">
             <v-card elevation="0" color="transparent">
               <v-card-title style="font-size: 14px; font-weight: 900"
                 >SHOP</v-card-title
@@ -289,7 +289,7 @@ const svgs = ref([
               >
             </v-card>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" sm="6" md="4" lg="3">
             <v-card elevation="0" color="transparent">
               <v-card-title style="font-size: 13px; font-weight: 900"
                 >FURTHER INFO.</v-card-title
@@ -317,7 +317,7 @@ const svgs = ref([
               >
             </v-card>
           </v-col>
-          <v-col cols="3">
+          <v-col cols="12" sm="6" md="4" lg="3">
             <v-card elevation="0" color="transparent">
               <v-card-title style="font-size: 13px; font-weight: 900"
                 >CUSTOMER SERVICE</v-card-title
@@ -345,7 +345,7 @@ const svgs = ref([
               >
             </v-card>
           </v-col>
-          <v-col cols="3" class="pt-7">
+          <v-col cols="12" sm="6" md="4" lg="3" class="pt-7">
             <v-card elevation="0" color="transparent">
               <img
                 src="@/assets/images/footer-logo.webp"
@@ -532,7 +532,7 @@ const svgs = ref([
               ></span>
             </div>
           </v-col>
-          <v-col cols="12">
+          <v-col cols="12" class="cards_img">
             <div class="img-parent text-center mt-10 mb-8">
               <img
                 src="https://new-ella-demo.myshopify.com/cdn/shop/files/trust_551fa8e0-5f24-4fbc-bf22-74c01b859a01.png?v=1639984732"
@@ -542,15 +542,15 @@ const svgs = ref([
           </v-col>
         </v-row>
         <v-row class="bg-white pt-7">
-          <v-col cols="6">
+          <v-col cols="12" md="6" class="text-center">
             <p style="color: rgb(127, 127, 127); font-size: 14px">
               &copy; {{ new Date().getFullYear() }} Ell Demo. All Rights
               Reserved Powered By /
               <span style="font-weight: 700; color: black">Mostafa Zayed</span>
             </p>
           </v-col>
-          <v-col cols="6">
-            <div class="master-cards d-flex justify-end" style="gap: 10px">
+          <v-col cols="12" md="6">
+            <div class="master-cards d-flex" style="gap: 10px; flex-wrap: wrap">
               <span v-for="(svg, i) in svgs" :key="i" v-html="svg"></span>
             </div>
           </v-col>
@@ -559,3 +559,13 @@ const svgs = ref([
     </v-footer>
   </div>
 </template>
+
+<style lang="scss">
+@media (max-width: 767px) {
+  .cards_img {
+    img {
+      width: 90%;
+    }
+  }
+}
+</style>
