@@ -1,6 +1,11 @@
 <script setup>
-import { ref, inject } from "vue";
+import { ref, inject, defineProps } from "vue";
 import { productsModule } from "@/stores/products";
+const props = defineProps({
+  windowWidth: {
+    type: Number,
+  },
+});
 const store = productsModule();
 const drawer = ref(false);
 const Emitter = inject("Emitter");
@@ -12,7 +17,7 @@ Emitter.on("openMenu", () => {
 <template>
   <div class="menu_drawer">
     <v-navigation-drawer
-      width="370"
+      :width="props.windowWidth <= 767 ? props.windowWidth / 2 : 370"
       temporary
       v-model="drawer"
       class="px-5 pt-0"

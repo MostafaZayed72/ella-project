@@ -16,8 +16,8 @@ window.onresize = () => {
 <template>
   <div class="layout">
     <v-layout class="position-relative">
-      <CardDrawer />
-      <MenuDrawer />
+      <CardDrawer :windowWidth="windowWidth" />
+      <MenuDrawer :windowWidth="windowWidth" />
       <v-main
         :style="`padding-top: ${
           $route.name == 'check_out'

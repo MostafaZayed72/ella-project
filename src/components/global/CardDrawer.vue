@@ -1,7 +1,12 @@
 <script setup>
-import { ref, inject } from "vue";
+import { ref, inject, defineProps } from "vue";
 import { cartStore } from "@/stores/cart";
 import { useRouter } from "vue-router";
+const props = defineProps({
+  windowWidth: {
+    type: Number,
+  },
+});
 const router = useRouter();
 const store = cartStore();
 const Emitter = inject("Emitter");
@@ -34,7 +39,7 @@ const toCheckout = () => {
   <div class="drawer">
     <v-navigation-drawer
       location="right"
-      width="370"
+      :width="props.windowWidth <= 767 ? props.windowWidth / 2 : 370"
       temporary
       v-model="drawer"
       class="pr-1"
