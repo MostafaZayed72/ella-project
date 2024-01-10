@@ -53,7 +53,7 @@ watch(
             sm="6"
             md="4"
             lg="3"
-            class="px-5 mt-8 mt-lg-0 px-10 px-sm-5"
+            class="px-5 mt-8 mt-lg-0 px-10 px-sm-5 text-center"
             v-for="item in categoryProducts.products"
             :key="item.id"
           >
