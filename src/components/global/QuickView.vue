@@ -49,7 +49,7 @@ Emitter.on("openQuickView", (data) => {
               type="image, image, image "
               v-if="loading"
             ></v-skeleton-loader>
-            <v-col cols="7" v-if="!loading">
+            <v-col cols="12" md="7" v-if="!loading">
               <img
                 :src="tab ? tab : product.thumbnail"
                 class="w-100"
@@ -66,7 +66,12 @@ Emitter.on("openQuickView", (data) => {
                 /></v-tab>
               </v-tabs>
             </v-col>
-            <v-col cols="5" class="pt-0 pl-6" v-if="!loading">
+            <v-col
+              cols="12"
+              md="5"
+              class="pt-0 pl-6 mt-8 mt-md-0"
+              v-if="!loading"
+            >
               <v-skeleton-loader
                 type="article, article, article "
                 v-if="loading"

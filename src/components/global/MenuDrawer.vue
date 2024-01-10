@@ -37,17 +37,22 @@ Emitter.on("openMenu", () => {
             class="px-0"
             v-for="cat in store.categories"
             :key="cat.rout"
-            ><v-list-item-title style="cursor: pointer">{{
+            ><v-list-item-title class="nav-link" style="cursor: pointer">{{
               cat.title
             }}</v-list-item-title></v-list-item
           ><v-list-group
             ><template v-slot:activator="{ props }"
               ><v-list-item v-bind="props" class="px-0"
-                ><v-list-item-title>Languages</v-list-item-title></v-list-item
+                ><v-list-item-title class="nav-link"
+                  >Languages</v-list-item-title
+                ></v-list-item
               ></template
             >
             <v-list-item
-              ><v-list-item-title class="d-flex align-center" style="gap: 10px">
+              ><v-list-item-title
+                class="d-flex align-center nav-link"
+                style="gap: 10px"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   version="1.1"
@@ -124,7 +129,9 @@ Emitter.on("openMenu", () => {
                 English</v-list-item-title
               ></v-list-item
             ><v-list-item
-              ><v-list-item-title class="d-flex align-center" style="gap: 10px"
+              ><v-list-item-title
+                class="d-flex align-center nav-link"
+                style="gap: 10px"
                 ><svg
                   xmlns="http://www.w3.org/2000/svg"
                   version="1.1"
@@ -156,3 +163,12 @@ Emitter.on("openMenu", () => {
     >
   </div>
 </template>
+
+<style lang="scss">
+//Media Queries
+@media (max-width: 580px) {
+  .nav-link {
+    font-size: 12px !important;
+  }
+}
+</style>

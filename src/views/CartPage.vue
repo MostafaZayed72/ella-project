@@ -147,7 +147,7 @@ const toCheckout = () => {
               >Continue Shopping</v-btn
             ></v-card-actions
           ></v-col
-        ><v-col cols="8" class="px-3" v-if="store.cartItems.length">
+        ><v-col cols="12" lg="8" class="px-3" v-if="store.cartItems.length">
           <v-table class="w-100"
             ><thead>
               <tr>
@@ -225,7 +225,7 @@ const toCheckout = () => {
                       <input
                         type="number"
                         class="text-center py-2"
-                        style="width: 40px; font-size: 12px"
+                        style="width: 30px; font-size: 12px"
                         min="1"
                         v-model="item.quantity"
                         color="#a6a6a6"
@@ -288,7 +288,11 @@ const toCheckout = () => {
             alt=""
           />
         </v-col>
-        <v-col cols="4" class="px-3" v-if="store.cartItems.length"
+        <v-col
+          cols="12"
+          lg="4"
+          class="px-3 mt-8 mt-lg-0"
+          v-if="store.cartItems.length"
           ><v-card elevation="0"
             ><v-card-title style="font-size: 14px; font-weight: bold"
               >ORDER SUMMARY</v-card-title
@@ -406,3 +410,13 @@ const toCheckout = () => {
     >
   </div>
 </template>
+
+<style lang="scss">
+@media (max-width: 767px) {
+  .cart-page {
+    table {
+      width: 800px !important;
+    }
+  }
+}
+</style>

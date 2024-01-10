@@ -49,8 +49,11 @@ watch(
         </v-row>
         <v-row v-else>
           <v-col
-            cols="3"
-            class="px-5"
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
+            class="px-5 mt-8 mt-lg-0 px-10 px-sm-5"
             v-for="item in categoryProducts.products"
             :key="item.id"
           >
