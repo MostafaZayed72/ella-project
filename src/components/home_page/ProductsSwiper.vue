@@ -124,22 +124,24 @@ const breakpoints = ref({
               >
             </div>
           </v-hover>
-          <v-card-text class="pl-0 pb-1"
+          <v-card-text class="pl-0 pb-1 text-center"
             >({{ item.title }})
             {{
               item.description.split(" ").length <= 2
                 ? item.description
-                : item.description.split(" ").slice(0, 5) + "..."
+                : item.description.split(" ").slice(0, 2) + "..."
             }}</v-card-text
           >
-          <v-rating
-            v-model="item.rating"
-            half-increments
-            readonly
-            color="yellow-darken-3"
-            size="x-small"
-          ></v-rating>
-          <v-card-text class="pl-0 pt-0">
+          <div class="rating text-center">
+            <v-rating
+              v-model="item.rating"
+              half-increments
+              readonly
+              color="yellow-darken-3"
+              size="x-small"
+            ></v-rating>
+          </div>
+          <v-card-text class="pl-0 pt-0 text-center">
             <del>${{ item.price }}</del> From
             <span class="text-red" style="font-weight: 900; font-size: 17px"
               >${{
