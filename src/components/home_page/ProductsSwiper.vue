@@ -171,7 +171,7 @@ const breakpoints = ref({
             /></v-btn>
           </v-btn-toggle>
         </v-card>
-        <div class="mt-8">
+        <div class="mt-8 text-center">
           <v-btn
             class="py-2 px-12"
             style="text-transform: none; border-radius: 30px"
