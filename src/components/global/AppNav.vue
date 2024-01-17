@@ -1,5 +1,5 @@
 <script setup>
-import { ref, inject } from "vue";
+import { ref, inject, onMounted } from "vue";
 import { productsModule } from "@/stores/products";
 import { cartStore } from "@/stores/cart";
 const storeCart = cartStore();
@@ -196,12 +196,42 @@ const categories = ref(store.categories);
 const openMenu = ref(() => {
   Emitter.emit("openMenu");
 });
+const isLightMode = ref(true);
+const icon = ref("mdi-lightbulb-on");
+
+onMounted(() => {
+  const savedMode = localStorage.getItem("themeMode");
+  if (savedMode !== null) {
+    isLightMode.value = savedMode === "light";
+  }
+  updateBodyClass();
+});
+
+const toggleMode = () => {
+  isLightMode.value = !isLightMode.value;
+  icon.value = isLightMode.value ? "mdi-lightbulb-on" : "mdi-lightbulb-outline";
+  updateBodyClass();
+
+  localStorage.setItem("themeMode", isLightMode.value ? "light" : "dark");
+};
+
+const updateBodyClass = () => {
+  if (isLightMode.value) {
+    document.body.classList.remove("dark-mode");
+    document.body.classList.add("light-mode");
+  } else {
+    document.body.classList.remove("light-mode");
+
+    document.body.classList.add("dark-mode");
+  }
+};
 </script>
 
 <template>
   <div class="nav-bar">
     <v-app-bar color="#02218f" height="fit-content" class="pt-3" absolute>
       <v-app-bar-nav-icon @click="openMenu"></v-app-bar-nav-icon>
+      <v-icon @click="toggleMode" style="color: yellow">{{ icon }}</v-icon>
       <v-container fluid>
         <v-row>
           <v-col cols="3">
@@ -409,3 +439,23 @@ const openMenu = ref(() => {
     </v-app-bar>
   </div>
 </template>
+
+<style>
+.dark-mode {
+  background-color: #333;
+  color: #ffff00 !important;
+}
+body.dark-mode {
+  color: yellow !important;
+}
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: rgb(148, 214, 40) !important;
+}
+</style>
