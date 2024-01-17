@@ -1,5 +1,5 @@
 <script setup>
-import { inject, ref } from "vue";
+import { inject, ref, onMounted } from "vue";
 import { productsModule } from "@/stores/products";
 import { cartStore } from "@/stores/cart";
 const storeCart = cartStore();
@@ -9,6 +9,35 @@ const openCart = () => {
 };
 const store = productsModule();
 const categories = ref(store.categories);
+const isLightMode = ref(true);
+const icon = ref("mdi-lightbulb-on");
+
+onMounted(() => {
+  const savedMode = localStorage.getItem("themeMode");
+  if (savedMode !== null) {
+    isLightMode.value = savedMode === "light";
+  }
+  updateBodyClass();
+});
+
+const toggleMode = () => {
+  isLightMode.value = !isLightMode.value;
+  icon.value = isLightMode.value ? "mdi-lightbulb-on" : "mdi-lightbulb-outline";
+  updateBodyClass();
+
+  localStorage.setItem("themeMode", isLightMode.value ? "light" : "dark");
+};
+
+const updateBodyClass = () => {
+  if (isLightMode.value) {
+    document.body.classList.remove("dark-mode");
+    document.body.classList.add("light-mode");
+  } else {
+    document.body.classList.remove("light-mode");
+
+    document.body.classList.add("dark-mode");
+  }
+};
 </script>
 
 <template>
@@ -17,13 +46,18 @@ const categories = ref(store.categories);
       <v-container fluid>
         <v-row>
           <v-col cols="3">
-            <img
-              class="w-50"
-              src="@/assets/images/logo.png"
-              alt=""
-              @click="$router.push({ name: 'home' })"
-              style="cursor: pointer"
-            />
+            <div class="logo-icon" style="display: flex; gap: 15px">
+              <img
+                class="w-50"
+                src="@/assets/images/logo.png"
+                alt=""
+                @click="$router.push({ name: 'home' })"
+                style="cursor: pointer"
+              />
+              <v-icon @click="toggleMode" style="color: yellow">{{
+                icon
+              }}</v-icon>
+            </div>
           </v-col>
           <v-col cols="7">
             <ul
@@ -102,3 +136,23 @@ const categories = ref(store.categories);
     </v-app-bar>
   </div>
 </template>
+
+<style>
+.dark-mode {
+  background-color: #333;
+  color: #ffff00 !important;
+}
+body.dark-mode {
+  color: yellow !important;
+}
+body.dark-mode p,
+body.dark-mode span,
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6 {
+  color: rgb(148, 214, 40) !important;
+}
+</style>
